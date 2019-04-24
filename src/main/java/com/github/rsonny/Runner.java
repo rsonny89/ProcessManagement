@@ -66,13 +66,7 @@ public class Runner {
       cycle += 1;
       System.out.printf("-- %d\n", cycle);
 
-      QueuedProcess queued = wait.peek();
-
-      if (queued != null) {
-        System.out.printf("Peek: %d Cycle - %d", queued.getProcess().getId(), queued.getCycle());
-      }
-
-      if (queued != null && queued.getCycle() == cycle) {
+      while (!wait.isEmpty() && wait.peek().getCycle() == cycle) {
         Process process = wait.remove().getProcess();
 
         System.out.printf("  Received IO interrupt for process %d\n", process.getId());
@@ -81,9 +75,7 @@ public class Runner {
         ready.add(process);
       }
 
-      queued = processes.peek();
-
-      if (queued != null && queued.getCycle() == cycle) {
+      if (!processes.isEmpty() && processes.peek().getCycle() == cycle) {
         Process process = processes.remove().getProcess();
 
         System.out.printf("  Received process %d\n", process.getId());
@@ -96,7 +88,7 @@ public class Runner {
       }
 
       if (current == null) {
-        System.out.println("  Ready queue is empty, waiting for next process");
+        System.out.println("  Ready queue is empty, waiting for next process\n");
       } else {
         System.out.printf("  Running process %d\n", current.getId());
 
