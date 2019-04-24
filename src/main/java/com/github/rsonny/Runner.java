@@ -42,9 +42,10 @@ public class Runner {
   }
 
   private void run() {
-    Queue<Process> ready = new LinkedList<>();
+    LinkedList<Process> ready = new LinkedList<>();
     Queue<QueuedProcess> wait = new LinkedList<>();
     Queue<QueuedProcess> processes = new LinkedList<>();
+    Scheduler scheduler = new FirstComeFirstServeScheduler();
     int start = 1;
 
     System.out.printf("Creating %d processes\n", count);
@@ -72,7 +73,7 @@ public class Runner {
         System.out.printf("  Received IO interrupt for process %d\n", process.getId());
         System.out.printf("  Placing process %d onto ready queue\n", process.getId());
 
-        ready.add(process);
+        scheduler.schedule(ready, process);
       }
 
       if (!processes.isEmpty() && processes.peek().getCycle() == cycle) {
@@ -80,12 +81,10 @@ public class Runner {
 
         System.out.printf("  Received process %d\n", process.getId());
 
-        ready.add(process);
+        scheduler.schedule(ready, process);
       }
 
-      if (current == null && !ready.isEmpty()) {
-        current = ready.remove();
-      }
+      current = scheduler.next(ready, current);
 
       if (current == null) {
         System.out.println("  Ready queue is empty, waiting for next process\n");
