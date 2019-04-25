@@ -30,3 +30,7 @@ For example, you'll see the first external dependency JCommander located in the 
 This tells maven to look for `com.beust.commander` from the [Maven Central Repository](https://search.maven.org/) when building the JAR artifact. The Maven Central Repository is just a centralized store for any external dependencies needed in a Java project.
 
 To get started with the project, you only need to run `mvn install`. This will run any tests, collect all dependencies, and output a JAR file in the `target/` directory. Ignore the rest of the folders in `target/` for now.
+
+### Run Current Project
+
+In order to run the current build of the project, simply run `mvn exec:java`.
