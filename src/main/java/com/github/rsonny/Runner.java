@@ -71,8 +71,6 @@ public class Runner {
     if (useShortestJob) scheduler = new ShortestJobScheduler();
 
     System.out.printf("Creating %d processes\n", processCount);
-    System.out.println();
-    System.out.println("PID Time");
 
     // Create x processes as interrupts to run at set intervals.
     for (int i = 0; i < processCount; i++) {
@@ -81,7 +79,6 @@ public class Runner {
 
       interrupts.add(new Interrupt(Interrupt.Type.NEW_PROCESS, start, process));
       start += ThreadLocalRandom.current().nextInt(1, 10);
-      System.out.printf("%-3s %d\n", process, process.getRemainingTime());
     }
 
     System.out.println();
@@ -113,7 +110,6 @@ public class Runner {
           continue;
         }
       }
-
 
       cycle += 1;
       Interrupt interrupt = interrupts.next(cycle);
