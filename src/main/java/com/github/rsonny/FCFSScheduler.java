@@ -1,12 +1,15 @@
 package com.github.rsonny;
 
-import java.util.LinkedList;
-
-public class FCFSScheduler implements Scheduler {
+public class FCFSScheduler extends Scheduler {
   @Override
-  public Process schedule(LinkedList<Process> ready, Process current) {
+  public Process schedule(Process current) {
     if (current != null) return current;
 
     return ready.isEmpty() ? null : ready.remove();
+  }
+
+  @Override
+  public void add(Process process) {
+    ready.add(process);
   }
 }

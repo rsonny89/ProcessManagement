@@ -4,7 +4,7 @@
 
   <groupId>com.github.rsonny</groupId>
   <artifactId>process-simulation</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <packaging>jar</packaging>
   <name>Process Simulation</name>
@@ -51,19 +51,28 @@
       </plugin>
 
       <plugin>
-        <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com.github.rsonny.Runner</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>
+                    com.github.rsonny.Runner
+                  </mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
