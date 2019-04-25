@@ -40,6 +40,9 @@ public class Runner {
     runner.run();
   }
 
+  /**
+   * Runner start point.
+   */
   private void run() {
     LinkedList<Process> ready = new LinkedList<>();
     InterruptQueue interrupts = new InterruptQueue();
@@ -48,6 +51,7 @@ public class Runner {
 
     System.out.printf("Creating %d processes\n", count);
 
+    // Create x processes as interrupts to run at set intervals.
     for (int i = 0; i < count; i++) {
       int actions = ThreadLocalRandom.current().nextInt(bottom, top);
       Process process = new Process(i + 1, actions, io);
@@ -74,12 +78,14 @@ public class Runner {
       cycle += 1;
       Interrupt interrupt = interrupts.next(cycle);
 
+      // Interrupts take precedence over all other actions.
       if (interrupt != null) {
         System.out.printf("%5d Interrupt %-3s %s\n", cycle, interrupt.getProcess(), interrupt.getType());
 
         ready.add(interrupt.getProcess());
 
-        if (cached == null) {
+        // Cache the current process if one exists.
+        if (cached == null && current != null) {
           cached = current;
           current = null;
         }
@@ -87,6 +93,8 @@ public class Runner {
         continue;
       }
 
+      // If there is no current process set, but there is a cached process or there are
+      // are processes in the ready queue, run the scheduler and move onto the next cycle.
       if (current == null && (cached != null || !ready.isEmpty())) {
         current = scheduler.schedule(ready, cached);
         System.out.printf("%5d Schedule  %s\n", cycle, current);
@@ -96,15 +104,20 @@ public class Runner {
         continue;
       }
 
+      // At this point if there is no scheduled process, we're just waiting for an IO
+      // or new process interrupt. Continue to the next cycle.
       if (current == null) {
         System.out.printf("%5d Wait\n", cycle);
 
         continue;
       }
 
+      // Run one tick of the current process and print the action.
       Process.Action action = current.process();
       System.out.printf("%5d Run       %-3s %s\n", cycle, current, action);
 
+      // If the action was an IO call, then generate a random IO delay and set the
+      // current process to null to it runs the scheduler again.
       if (action == Process.Action.IO) {
         int delay = cycle + ThreadLocalRandom.current().nextInt(2, 20);
 
@@ -114,6 +127,7 @@ public class Runner {
         continue;
       }
 
+      // Remove the current process completely if it's done.
       if (action == Process.Action.END) current = null;
     }
   }

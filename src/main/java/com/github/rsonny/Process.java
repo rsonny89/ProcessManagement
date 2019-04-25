@@ -4,6 +4,9 @@ package com.github.rsonny;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Process {
+  /**
+   * Different types of actions the process can before while running.
+   */
   public enum Action {
     PROCESS(""), IO("IO"), END("END");
 
@@ -63,4 +66,8 @@ public class Process {
   }
 
   public int getId() { return id; }
+
+  public int getRemainingTime() {
+    return runtime.length - current;
+  }
 }
