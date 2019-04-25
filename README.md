@@ -148,3 +148,7 @@ CPU Utilization: 53
 ```
 
 CPU utilization drops significantly with an increase in IO calls and IO wait time. Of course, this is also a luck of the draw to get these results because the amount of wait time is randomized and the number of IO calls are randomized, but on average the CPU utilization is lower.
+
+### Packaging
+
+In order to package the final project, run `mvn package`. This will output `process-simulation-1.0-jar-with-dependencies.jar`. This is a self executable jar file that can simply be run as `java -jar process-simulation-1.0-jar-with-dependencies.jar`. Any CLI options are just appended to the end like this `java -jar process-simulation-1.0-jar-with-dependencies.jar --count 100 --wait 0`.
