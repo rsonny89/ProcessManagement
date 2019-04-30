@@ -1,4 +1,4 @@
-package com.github.rsonny;
+package com.rsonny.process;
 
 import java.util.LinkedList;
 
@@ -15,15 +15,18 @@ public class InterruptQueue extends LinkedList<Interrupt> {
     }
 
     super.add(interrupt);
+
     return true;
   }
 
   public Interrupt next(int cycle) {
-    if (super.isEmpty()) return null;
+    if (super.isEmpty()) {
+      return null;
+    }
 
-    Interrupt interrupt = super.peek();
-
-    if (interrupt.getCycle() <= cycle) return super.remove();
+    if (super.peek().getCycle() <= cycle) {
+      return super.remove();
+    }
 
     return null;
   }

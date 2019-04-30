@@ -1,4 +1,4 @@
-package com.github.rsonny;
+package com.rsonny;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,4 +1,4 @@
-package com.github.rsonny;
+package com.rsonny.process;
 
 public class Interrupt {
   public enum Type {

@@ -49,7 +49,7 @@ Usage: <main class> [options]
     --help
       Prints possible options for the CLI tool
     -i, --interactive
-      Runs the scheduler in interactive mode
+      Runs the queue in interactive mode
       Default: false
     --io-bottom
       Lowest number of cycles a process will wait for IO
@@ -64,7 +64,7 @@ Usage: <main class> [options]
       If the scheduling info should be shown in non interactive mode
       Default: false
     --shortest
-      Runs the shortest job scheduler
+      Runs the shortest job queue
       Default: false
     --top, -t
       Upper limit of the process runtime value
@@ -75,7 +75,7 @@ Usage: <main class> [options]
 
 ```
 
-By default, the program runs the first come first served scheduler.
+By default, the program runs the first come first served queue.
 
 When using the tool for the first time, it's recommended to use the interactive mode. This is done by typing the command `mvn exec:java -Dexec.args="-i"`. You should see something appear like this:
 
@@ -115,7 +115,7 @@ Order PID Remaining
 
 ```
 
-This mode walks you through how the scheduler operates on each cycle and displays the current ready queue order based on the scheduling algorithm. Keep pressing enter to walk through each step until it's down or press `ctrl-c` to exit.
+This mode walks you through how the queue operates on each cycle and displays the current ready queue order based on the scheduling algorithm. Keep pressing enter to walk through each step until it's down or press `ctrl-c` to exit.
 
 At the end of each finished cycle, it shows a calculation of the amount of CPU utilized:
 
