@@ -79,11 +79,6 @@ public class Runner {
     description = "Runs the shortest job scheduler")
   private boolean useShortestJob = false;
 
-  @Parameter(
-    names = {"-p", "--print-info"},
-    description = "Print scheduling info in non interactive mode")
-  private boolean printInfo = false;
-
   private Scanner scanner = new Scanner(System.in);
 
   private LinkedList<Process> ready = new LinkedList<>();
