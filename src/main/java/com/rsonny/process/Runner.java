@@ -9,8 +9,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.JCommander;
 
 /**
- * Hello world!
- *
+ * Main runner class for the application.
  */
 public class Runner {
   @Parameter(
@@ -163,6 +162,9 @@ public class Runner {
       System.out.printf(" %-3d   %-3d   %d\n", process.getId(), process.getIOCallCount(), process.getCycles());
     }
 
+    System.out.println();
+    System.out.print("Press [ENTER] to begin:");
+    scanner.nextLine();
     System.out.println();
     System.out.println("==< START >=========================");
     System.out.print(" CYCLE   ACTION      PID   TYPE");
