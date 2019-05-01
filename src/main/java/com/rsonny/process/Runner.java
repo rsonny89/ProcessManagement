@@ -138,7 +138,7 @@ public class Runner {
   private void run() throws InterruptedException {
     int start = 1;
 
-    System.out.println("==< OPTIONS >===================");
+    System.out.println("==< OPTIONS >=======================");
     System.out.printf(" Count:    %d Processes\n", processCount);
     System.out.printf(" Runtime:  %d - %d Cycles\n", runtimeMin, runtimeMax);
     System.out.printf(" Start:    %d - %d Cycles\n", startMin, startMax);
@@ -161,7 +161,7 @@ public class Runner {
       start += ThreadLocalRandom.current().nextInt(startMin, startMax);
     }
 
-    System.out.println("==< PROCESSES >==================");
+    System.out.println("==< PROCESSES >=====================");
     System.out.println(" PID   IOP   CYCLES");
 
     for (Process process: processes) {
@@ -169,7 +169,7 @@ public class Runner {
     }
 
     System.out.println();
-    System.out.println("==< START >========================");
+    System.out.println("==< START >=========================");
     System.out.print(" CYCLE   ACTION      PID   TYPE");
 
     while (current != null || cached != null || !ready.isEmpty() || !interrupts.isEmpty()) {
@@ -256,7 +256,7 @@ public class Runner {
 
     double utilization = (waitCycleCount * (cycle * 1d)) / (cycle);
 
-    System.out.println("\n\n[STATISTICS] ==========");
+    System.out.println("\n\n==< STATISTICS >====================");
     System.out.printf(" CPU Utilization: %.0f\n\n", 100d - utilization);
 
     System.out.println(" PID  CYCLES  WAITING");
