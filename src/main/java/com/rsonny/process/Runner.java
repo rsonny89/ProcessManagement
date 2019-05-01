@@ -15,68 +15,68 @@ import com.beust.jcommander.JCommander;
 public class Runner {
   @Parameter(
     names = {"--count", "-c"},
-    description = "Number of processes to create")
+    description = "Number of processes to create.")
   private int processCount = 10;
 
   @Parameter(
     names = {"--runtime-max"},
-    description = "Maximum number of cycles a process can take")
+    description = "Maximum number of cycles a process can take.")
   private int runtimeMax = 10;
 
   @Parameter(
     names = {"--runtime-min"},
-    description = "Minimum number of cycles a process can take")
+    description = "Minimum number of cycles a process can take.")
   private int runtimeMin = 1;
 
   @Parameter(
     names = {"--io-max"},
-    description = "Maximum number of IO calls a process can make")
+    description = "Maximum number of IO calls a process can make.")
   private int ioMax = 2;
 
   @Parameter(
     names = {"--io-min"},
-    description = "Minimum number of IO calls a process can make")
+    description = "Minimum number of IO calls a process can make.")
   private int ioMin = 0;
 
   @Parameter(
     names = {"--wait-max"},
-    description = "Maximum number of cycles a process will wait for IO")
+    description = "Maximum number of cycles a process will wait for IO.")
   private int waitMax = 10;
 
   @Parameter(
     names = {"--wait-min"},
-    description = "Minimum number of cycles a process will wait for IO")
+    description = "Minimum number of cycles a process will wait for IO.")
   private int waitMin = 5;
 
   @Parameter(
     names = {"--start-max"},
-    description = "Maximum number of cycles a new process will wait to start from the previous one")
+    description = "Maximum number of cycles a new process will wait to start from the previous one.")
   private int startMax = 10;
 
   @Parameter(
     names = {"--start-min"},
-    description = "Minumum number of cycles a new process will wait to start from the previous one")
+    description = "Minumum number of cycles a new process will wait to start from the previous one.")
   private int startMin = 1;
 
   @Parameter(
     names = "--help",
     help = true,
-    description = "Prints possible options for the CLI tool")
+    description = "Prints possible options for the CLI tool.")
   private boolean help = false;
 
   @Parameter(
     names = {"-i", "--interactive"},
-    description = "Runs the scheduler in interactive mode")
+    description = "Runs the scheduler in interactive mode.")
   private boolean interactive = false;
 
   @Parameter(
     names = {"--interval"},
-    description = "Time in milliseconds each cycle should take")
+    description = "Time in milliseconds each cycle should take.")
   private int interval = 500;
 
   @Parameter(
     names = {"--shortest"},
-    description = "Runs the shortest job scheduler")
+    description = "Runs the shortest job scheduler.")
   private boolean useShortestJob = false;
 
   private Scanner scanner = new Scanner(System.in);
