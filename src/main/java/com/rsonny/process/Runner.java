@@ -132,12 +132,36 @@ public class Runner {
   private void run() throws InterruptedException {
     int start = 1;
 
+    if (runtimeMax <= runtimeMin) {
+      runtimeMax = runtimeMin + 1;
+    }
+
+    if (startMax <= startMin) {
+      startMax = startMin + 1;
+    }
+
+    if (ioMax <= ioMin) {
+      ioMax = ioMin + 1;
+    }
+
+    if (waitMax <= waitMin) {
+      waitMax = waitMin + 1;
+    }
+
     System.out.println("==< OPTIONS >=======================");
-    System.out.printf(" Count:    %d Processes\n", processCount);
-    System.out.printf(" Runtime:  %d - %d Cycles\n", runtimeMin, runtimeMax);
-    System.out.printf(" Start:    %d - %d Cycles\n", startMin, startMax);
-    System.out.printf(" IO:       %d - %d Calls\n", ioMin, ioMax);
-    System.out.printf(" Latency:  %d - %d Cycles\n", waitMin, waitMax);
+    System.out.printf(" Count:      %d Processes\n", processCount);
+    System.out.printf(" Runtime:    %d - %d Cycles\n", runtimeMin, runtimeMax);
+    System.out.printf(" Start:      %d - %d Cycles\n", startMin, startMax);
+    System.out.printf(" IO:         %d - %d Calls\n", ioMin, ioMax);
+    System.out.printf(" Latency:    %d - %d Cycles\n", waitMin, waitMax);
+    System.out.print(" Scheduler:  ");
+
+    if (useShortestJob) {
+      System.out.println("Shortest Job");
+    } else {
+      System.out.println("First Come First Serve");
+    }
+
     System.out.println();
 
     // Switch to the shortest job scheduler if the flag is set.
@@ -251,10 +275,8 @@ public class Runner {
       }
     }
 
-    double utilization = (waitCycleCount * (cycle * 1d)) / (cycle);
-
     System.out.println("\n\n==< STATISTICS >====================");
-    System.out.printf(" CPU Utilization: %.0f\n\n", 100d - utilization);
+    System.out.printf(" CPU Utilization: %d / %d Cycles\n\n", cycle - waitCycleCount, cycle);
 
     System.out.println(" PID  CYCLES  WAITING");
 
