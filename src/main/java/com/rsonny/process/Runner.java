@@ -132,21 +132,22 @@ public class Runner {
   private void run() throws InterruptedException {
     int start = 1;
 
-    if (runtimeMax <= runtimeMin) {
-      runtimeMax = runtimeMin + 1;
+    if (runtimeMax < runtimeMin) {
+      runtimeMax = runtimeMin;
     }
 
-    if (startMax <= startMin) {
-      startMax = startMin + 1;
+    if (startMax < startMin) {
+      startMax = startMin;
     }
 
-    if (ioMax <= ioMin) {
-      ioMax = ioMin + 1;
+    if (ioMax < ioMin) {
+      ioMax = ioMin;
     }
 
-    if (waitMax <= waitMin) {
-      waitMax = waitMin + 1;
+    if (waitMax < waitMin) {
+      waitMax = waitMin;
     }
+
 
     System.out.println("==< OPTIONS >=======================");
     System.out.printf(" Count:      %d Processes\n", processCount);
@@ -171,12 +172,12 @@ public class Runner {
 
     // Create x processes as interrupts to run at set intervals.
     for (int i = 0; i < processCount; i++) {
-      int actions = ThreadLocalRandom.current().nextInt(runtimeMin, runtimeMax);
+      int actions = ThreadLocalRandom.current().nextInt(runtimeMin, runtimeMax + 1);
       Process process = new Process(i + 1, actions, ThreadLocalRandom.current().nextInt(ioMin, ioMax + 1));
 
       processes.add(process);
       interrupts.add(new Interrupt(Interrupt.Type.NEW_PROCESS, start, process));
-      start += ThreadLocalRandom.current().nextInt(startMin, startMax);
+      start += ThreadLocalRandom.current().nextInt(startMin, startMax + 1);
     }
 
     System.out.println("==< PROCESSES >=====================");
@@ -261,7 +262,7 @@ public class Runner {
       // If the action was an IO call, then generate a random IO delay and set the
       // current process to null to it runs the queue again.
       if (action == Process.Action.IO) {
-        int delay = cycle + ThreadLocalRandom.current().nextInt(waitMin, waitMax);
+        int delay = cycle + ThreadLocalRandom.current().nextInt(waitMin, waitMax + 1);
 
         interrupts.add(new Interrupt(Interrupt.Type.IO_FINISHED, delay, current));
         current = null;

@@ -43,12 +43,16 @@ public class Process {
       this.runtime[i] = Action.PROCESS;
     }
 
+    calls = calls >= actions ? actions : calls;
+
     int lastIO = 0;
+    int max = actions - calls + 1;
 
     for (int i = 0; i < calls && lastIO < actions; i++) {
-      lastIO = ThreadLocalRandom.current().nextInt(lastIO, actions);
+      lastIO = ThreadLocalRandom.current().nextInt(lastIO, max);
       this.runtime[lastIO] = Action.IO;
       lastIO += 1;
+      max += 1;
     }
   }
 
