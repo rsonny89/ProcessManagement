@@ -103,6 +103,9 @@ public class Runner {
     runner.run();
   }
 
+  /**
+   * Prints the current ready queue to the console.
+   */
   private void printReadyQueue() {
     System.out.println(" └-----< QUEUE >--------------------");
     System.out.println("         ORDER  PID  CYCLES");
@@ -132,6 +135,7 @@ public class Runner {
   private void run() throws InterruptedException {
     int start = 1;
 
+    // Set any ranges to the minimum value to prevent out of bounds errors.
     if (runtimeMax < runtimeMin) {
       runtimeMax = runtimeMin;
     }
@@ -148,7 +152,7 @@ public class Runner {
       waitMax = waitMin;
     }
 
-
+    // Print starting options.
     System.out.println("==< OPTIONS >=======================");
     System.out.printf(" Count:      %d Processes\n", processCount);
     System.out.printf(" Runtime:    %d - %d Cycles\n", runtimeMin, runtimeMax);
@@ -157,6 +161,7 @@ public class Runner {
     System.out.printf(" Latency:    %d - %d Cycles\n", waitMin, waitMax);
     System.out.print(" Scheduler:  ");
 
+    // Print scheduler info.
     if (useShortestJob) {
       System.out.println("Shortest Job");
     } else {

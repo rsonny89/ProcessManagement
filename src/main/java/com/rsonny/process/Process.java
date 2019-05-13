@@ -35,6 +35,12 @@ public class Process {
   // Unique process ID.
   private int id;
 
+  /**
+   * Creates a new process.
+   * @param id Identifier of the process.
+   * @param actions Number of actions the process should contain.
+   * @param calls Number of actions that should be IO calls.
+   */
   public Process(int id, int actions, int calls) {
     this.id = id;
     this.runtime = new Action[actions];
@@ -76,10 +82,6 @@ public class Process {
     this.waitCycleCount += 1;
   }
 
-  /**
-   *
-   * @return
-   */
   @Override
   public String toString() {
     return String.format("%d", this.id);
@@ -107,6 +109,10 @@ public class Process {
     return this.waitCycleCount;
   }
 
+  /**
+   * Returns the number of IO calls contained in this process.
+   * @return Number of IO calls in this process.
+   */
   public int getIOCallCount() {
     int count = 0;
 
@@ -117,6 +123,10 @@ public class Process {
     return count;
   }
 
+  /**
+   * Returns the total number of cycles in this process.
+   * @return Total number of cycles in this process.
+   */
   public int getCycles() {
     return runtime.length;
   }

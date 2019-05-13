@@ -1,8 +1,15 @@
 package com.rsonny.process;
 
+/**
+ * Representation of a CPU interrupt.
+ */
 public class Interrupt {
+  /**
+   * Representation of the type of interrupt.
+   */
   public enum Type {
-    NEW_PROCESS("NEW"), IO_FINISHED("IO");
+    NEW_PROCESS("NEW"), // Represents a new process.
+    IO_FINISHED("IO");  // Represents when an IO call is complete.
 
     private String name;
 
@@ -20,6 +27,12 @@ public class Interrupt {
   private Process process;
   private int cycle;
 
+  /**
+   * Creates a new interrupt.
+   * @param type Type of interrupt this should be.
+   * @param cycle Target cycle for the interrupt to occur.
+   * @param process Process to associated with the interrupt.
+   */
   public Interrupt(Type type, int cycle, Process process) {
     this.type = type;
     this.cycle = cycle;
